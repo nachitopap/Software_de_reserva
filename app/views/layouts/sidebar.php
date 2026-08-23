@@ -21,6 +21,12 @@ switch ($role) {
                 'icon' => 'bi-people-fill',
                 'href' => appPath('public/admin/usuarios.php')
             ],
+            [
+                'label' => 'Gestionar servicios',
+                'description' => 'Activar, desactivar y revisar servicios.',
+                'icon' => 'bi-gear-fill',
+                'href' => appPath('public/admin/servicios.php')
+            ],
             
         ];
         break;
