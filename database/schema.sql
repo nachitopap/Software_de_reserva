@@ -65,13 +65,17 @@ CREATE TABLE IF NOT EXISTS reservas (
 -- ------------------------------------------------------------
 -- Usuario admin por defecto  (password: Admin1234!)
 -- ------------------------------------------------------------
-INSERT INTO usuarios (nombre, sobrenombre, apellidop, apellidom, email, password, rol)
+INSERT INTO usuarios (rut, rut_hash, nombre, sobrenombre, apellidop, apellidom, email, password, rol)
 VALUES (
+    '11111111K',
+    UNHEX(SHA2('11111111K', 256)),
     'Admin',
     '',
     'Sistema',
-    '',
+    'Principal',
     'admin@reservas.com',
-    'id23.-',  -- reemplazar con hash real
+    '$2y$12$CRIx8io0KnmYdhCsyM0mJOTFBGhMTOLNxM3y9q/kjz78O/W3P3BAC',
     'admin'
 );
+
+---- Admin1234!

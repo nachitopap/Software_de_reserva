@@ -19,11 +19,20 @@
     <?php endif; ?>
 
     <form method="POST" action="register.php" novalidate>
+        <label for="rut">RUT</label>
+        <input type="text" id="rut" name="rut" required placeholder="12345678K">
+
         <label for="nombre">Nombre</label>
         <input type="text" id="nombre" name="nombre" required placeholder="Juan">
 
-        <label for="apellido">Apellido</label>
-        <input type="text" id="apellido" name="apellido" required placeholder="Pérez">
+        <label for="sobrenombre">Sobrenombre</label>
+        <input type="text" id="sobrenombre" name="sobrenombre" placeholder="Juanito">
+
+        <label for="apellidop">Apellido paterno</label>
+        <input type="text" id="apellidop" name="apellidop" required placeholder="Pérez">
+
+        <label for="apellidom">Apellido materno</label>
+        <input type="text" id="apellidom" name="apellidom" required placeholder="González">
 
         <label for="email">Email</label>
         <input type="email" id="email" name="email" required placeholder="usuario@email.com">

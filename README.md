@@ -15,7 +15,6 @@ Software_de_reserva/
 ├── config/
 │   ├── funciones.php       # Constantes globales y arranque de sesión
 │   ├── config.php          # Conexión MySQL (ajustar credenciales)
-│   ├── config.example.php  # Ejemplo de configuración de BD
 │   └── app.json            # Configuración en JSON
 ├── database/
 │   └── schema.sql          # Esquema y datos iniciales de la BD
@@ -46,7 +45,7 @@ Software_de_reserva/
 ## Instalación rápida
 
 1. Importar `database/schema.sql` en MySQL.
-2. Copiar `config/config.example.php` como `config/config.php` y ajustar `DB_HOST`, `DB_USER`, `DB_PASS`, `DB_NAME`.
+2. Ajustar `config/config.php` con `DB_HOST`, `DB_USER`, `DB_PASS` y `DB_NAME`.
 3. Apuntar el servidor web (Apache/Nginx) a la carpeta `public/`.
 4. Navegar a `http://localhost/Software_de_reserva/public/`.
 

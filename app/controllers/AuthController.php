@@ -7,7 +7,10 @@ class AuthController {
     public function login(string $email, string $password): array {
         $db = getDB();
         $stmt = $db->prepare(
-            'SELECT id, nombre, apellido, email, password, rol FROM usuarios WHERE email = ? AND activo = 1 LIMIT 1'
+            'SELECT id, nombre, sobrenombre, apellidop, apellidom, email, password, rol
+             FROM usuarios
+             WHERE email = ? AND activo = 1
+             LIMIT 1'
         );
         $stmt->bind_param('s', $email);
         $stmt->execute();
@@ -21,14 +24,14 @@ class AuthController {
         }
 
         $_SESSION['user_id']   = $user['id'];
-        $_SESSION['user_name'] = $user['nombre'] . ' ' . $user['apellido'];
+        $_SESSION['user_name'] = self::buildUserDisplayName($user);
         $_SESSION['user_role'] = $user['rol'];
 
         return ['success' => true, 'role' => $user['rol']];
     }
 
     public function register(array $data): array {
-        $required = ['nombre', 'apellido', 'email', 'password', 'rol'];
+        $required = ['rut', 'nombre', 'apellidop', 'apellidom', 'email', 'password', 'rol'];
         foreach ($required as $field) {
             if (empty($data[$field])) {
                 return ['success' => false, 'message' => "El campo $field es obligatorio."];
@@ -48,9 +51,13 @@ class AuthController {
             return ['success' => false, 'message' => 'La contraseña debe tener al menos 8 caracteres.'];
         }
 
+        $rutNormalizado = self::normalizeRut($data['rut']);
+        if ($rutNormalizado === '') {
+            return ['success' => false, 'message' => 'RUT no válido.'];
+        }
+
         $db = getDB();
 
-        // Verificar email único
         $check = $db->prepare('SELECT id FROM usuarios WHERE email = ? LIMIT 1');
         $check->bind_param('s', $data['email']);
         $check->execute();
@@ -62,15 +69,34 @@ class AuthController {
         }
         $check->close();
 
+        $rutHash = hash('sha256', $rutNormalizado, true);
+        $check = $db->prepare('SELECT id FROM usuarios WHERE rut_hash = ? LIMIT 1');
+        $check->bind_param('s', $rutHash);
+        $check->execute();
+        $check->store_result();
+        if ($check->num_rows > 0) {
+            $check->close();
+            $db->close();
+            return ['success' => false, 'message' => 'El RUT ya está registrado.'];
+        }
+        $check->close();
+
         $hash = password_hash($data['password'], PASSWORD_BCRYPT, ['cost' => 12]);
+        $sobrenombre = trim($data['sobrenombre'] ?? '');
+        $rut         = trim($data['rut']);
 
         $stmt = $db->prepare(
-            'INSERT INTO usuarios (nombre, apellido, email, password, rol) VALUES (?, ?, ?, ?, ?)'
+            'INSERT INTO usuarios (rut, rut_hash, nombre, sobrenombre, apellidop, apellidom, email, password, rol)
+             VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)'
         );
         $stmt->bind_param(
-            'sssss',
+            'sssssssss',
+            $rut,
+            $rutHash,
             $data['nombre'],
-            $data['apellido'],
+            $sobrenombre,
+            $data['apellidop'],
+            $data['apellidom'],
             $data['email'],
             $hash,
             $data['rol']
@@ -102,5 +128,19 @@ class AuthController {
             header('Location: ' . appPath('public/acceso_denegado.php'));
             exit;
         }
+    }
+
+    private static function normalizeRut(string $rut): string {
+        $normalized = strtoupper(trim($rut));
+        $normalized = preg_replace('/[^0-9K]/', '', $normalized) ?? '';
+        return $normalized;
+    }
+
+    private static function buildUserDisplayName(array $user): string {
+        return trim(implode(' ', array_filter([
+            trim((string)($user['nombre'] ?? '')),
+            trim((string)($user['apellidop'] ?? '')),
+            trim((string)($user['apellidom'] ?? '')),
+        ])));
     }
 }

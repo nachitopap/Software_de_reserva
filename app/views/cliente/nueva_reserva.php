@@ -23,7 +23,7 @@
             <?php foreach ($servicios as $s): ?>
             <option value="<?= (int)$s['id'] ?>">
                 <?= htmlspecialchars($s['nombre']) ?> –
-                <?= htmlspecialchars($s['proveedor_nombre'] . ' ' . $s['proveedor_apellido']) ?> –
+                <?= htmlspecialchars($s['proveedor_nombre_completo']) ?> –
                 $<?= number_format($s['precio'], 2) ?>
             </option>
             <?php endforeach; ?>

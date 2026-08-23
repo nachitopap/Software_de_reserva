@@ -19,7 +19,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 }
 
-$result   = $db->query('SELECT id, nombre, apellido, email, rol, activo, created_at FROM usuarios ORDER BY created_at DESC');
+$result   = $db->query('SELECT id, rut, nombre, sobrenombre, apellidop, apellidom, email, rol, activo, created_at FROM usuarios ORDER BY created_at DESC');
 $usuarios = $result ? $result->fetch_all(MYSQLI_ASSOC) : [];
 $db->close();
 

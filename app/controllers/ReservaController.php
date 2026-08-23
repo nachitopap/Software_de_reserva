@@ -8,7 +8,7 @@ class ReservaController {
         $db   = getDB();
         $stmt = $db->prepare(
             'SELECT r.id, s.nombre AS servicio, r.fecha_reserva, r.estado, r.notas,
-                    u.nombre AS proveedor_nombre, u.apellido AS proveedor_apellido
+                    TRIM(CONCAT_WS(" ", u.nombre, u.apellidop, u.apellidom)) AS proveedor_nombre_completo
              FROM reservas r
              JOIN servicios s ON r.servicio_id = s.id
              JOIN usuarios  u ON s.proveedor_id = u.id
@@ -27,7 +27,7 @@ class ReservaController {
         $db   = getDB();
         $stmt = $db->prepare(
             'SELECT r.id, s.nombre AS servicio, r.fecha_reserva, r.estado, r.notas,
-                    u.nombre AS cliente_nombre, u.apellido AS cliente_apellido
+                    TRIM(CONCAT_WS(" ", u.nombre, u.apellidop, u.apellidom)) AS cliente_nombre_completo
              FROM reservas r
              JOIN servicios s ON r.servicio_id = s.id
              JOIN usuarios  u ON r.cliente_id  = u.id
@@ -76,8 +76,8 @@ class ReservaController {
         $db   = getDB();
         $stmt = $db->prepare(
             'SELECT r.id, s.nombre AS servicio, r.fecha_reserva, r.estado,
-                    c.nombre AS cliente_nombre, c.apellido AS cliente_apellido,
-                    p.nombre AS proveedor_nombre, p.apellido AS proveedor_apellido
+                    TRIM(CONCAT_WS(" ", c.nombre, c.apellidop, c.apellidom)) AS cliente_nombre_completo,
+                    TRIM(CONCAT_WS(" ", p.nombre, p.apellidop, p.apellidom)) AS proveedor_nombre_completo
              FROM reservas r
              JOIN servicios s ON r.servicio_id  = s.id
              JOIN usuarios  c ON r.cliente_id   = c.id

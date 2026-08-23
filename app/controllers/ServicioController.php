@@ -8,7 +8,7 @@ class ServicioController {
         $db   = getDB();
         $stmt = $db->prepare(
             'SELECT s.id, s.nombre, s.descripcion, s.precio, s.duracion_min,
-                    u.nombre AS proveedor_nombre, u.apellido AS proveedor_apellido
+                    TRIM(CONCAT_WS(" ", u.nombre, u.apellidop, u.apellidom)) AS proveedor_nombre_completo
              FROM servicios s
              JOIN usuarios u ON s.proveedor_id = u.id
              WHERE s.activo = 1

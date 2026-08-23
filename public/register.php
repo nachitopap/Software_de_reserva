@@ -8,11 +8,14 @@ $success = '';
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $auth   = new AuthController();
     $result = $auth->register([
-        'nombre'   => trim($_POST['nombre']   ?? ''),
-        'apellido' => trim($_POST['apellido'] ?? ''),
-        'email'    => trim($_POST['email']    ?? ''),
-        'password' => $_POST['password']      ?? '',
-        'rol'      => $_POST['rol']           ?? '',
+        'rut'         => trim($_POST['rut'] ?? ''),
+        'nombre'      => trim($_POST['nombre'] ?? ''),
+        'sobrenombre' => trim($_POST['sobrenombre'] ?? ''),
+        'apellidop'   => trim($_POST['apellidop'] ?? ''),
+        'apellidom'   => trim($_POST['apellidom'] ?? ''),
+        'email'       => trim($_POST['email'] ?? ''),
+        'password'    => $_POST['password'] ?? '',
+        'rol'         => $_POST['rol'] ?? '',
     ]);
     if ($result['success']) {
         $success = $result['message'];

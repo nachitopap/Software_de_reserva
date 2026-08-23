@@ -41,7 +41,7 @@ function appPath(string $path = ''): string {
 function appDashboardUrlForRole(string $role = ''): string {
     switch ($role) {
         case ROLE_ADMIN:
-            return appPath('public/admin/dashboard.php');
+            return appPath('public/admin/usuarios.php');
         case ROLE_PROVEEDOR:
             return appPath('public/proveedor/dashboard.php');
         default:

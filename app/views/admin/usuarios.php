@@ -20,6 +20,7 @@
         <thead>
             <tr>
                 <th>#</th>
+                <th>RUT</th>
                 <th>Nombre</th>
                 <th>Email</th>
                 <th>Rol</th>
@@ -32,14 +33,15 @@
         <?php foreach ($usuarios as $u): ?>
             <tr>
                 <td><?= (int)$u['id'] ?></td>
-                <td><?= htmlspecialchars($u['nombre'] . ' ' . $u['apellido']) ?></td>
+                <td><?= htmlspecialchars((string)$u['rut']) ?></td>
+                <td><?= htmlspecialchars(trim(implode(' ', array_filter([$u['nombre'], $u['apellidop'], $u['apellidom']])))) ?></td>
                 <td><?= htmlspecialchars($u['email']) ?></td>
                 <td><span class="badge badge-<?= htmlspecialchars($u['rol']) ?>"><?= htmlspecialchars($u['rol']) ?></span></td>
                 <td><?= $u['activo'] ? 'Activo' : 'Inactivo' ?></td>
                 <td><?= htmlspecialchars($u['created_at']) ?></td>
                 <td>
                     <?php if ((int)$u['id'] !== (int)$_SESSION['user_id']): ?>
-                    <form method="POST" action="toggle_usuario.php" style="display:inline">
+                    <form method="POST" action="usuarios.php" style="display:inline">
                         <input type="hidden" name="usuario_id" value="<?= (int)$u['id'] ?>">
                         <button type="submit" class="btn btn-sm <?= $u['activo'] ? 'btn-danger' : 'btn-success' ?>">
                             <?= $u['activo'] ? 'Desactivar' : 'Activar' ?>

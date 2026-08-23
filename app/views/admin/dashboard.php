@@ -47,8 +47,8 @@
             <tr>
                 <td><?= (int)$r['id'] ?></td>
                 <td><?= htmlspecialchars($r['servicio']) ?></td>
-                <td><?= htmlspecialchars($r['cliente_nombre'] . ' ' . $r['cliente_apellido']) ?></td>
-                <td><?= htmlspecialchars($r['proveedor_nombre'] . ' ' . $r['proveedor_apellido']) ?></td>
+                <td><?= htmlspecialchars($r['cliente_nombre_completo']) ?></td>
+                <td><?= htmlspecialchars($r['proveedor_nombre_completo']) ?></td>
                 <td><?= htmlspecialchars($r['fecha_reserva']) ?></td>
                 <td><span class="badge badge-<?= htmlspecialchars($r['estado']) ?>"><?= htmlspecialchars($r['estado']) ?></span></td>
             </tr>
