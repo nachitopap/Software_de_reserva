@@ -1,4 +1,3 @@
 <?php
 
-header('Location: ' . rtrim(dirname($_SERVER['SCRIPT_NAME']), '/\\') . '/app/views/cliente/inicio.php');
-exit;
+require __DIR__ . '/app/views/cliente/inicio.php';

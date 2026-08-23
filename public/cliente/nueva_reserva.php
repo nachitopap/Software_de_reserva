@@ -4,12 +4,16 @@ require_once __DIR__ . '/../../app/controllers/AuthController.php';
 require_once __DIR__ . '/../../app/controllers/ReservaController.php';
 require_once __DIR__ . '/../../app/controllers/ServicioController.php';
 
-AuthController::requireAuth(ROLE_CLIENTE);
-
 $pageAlerts = [];
 $servicios = (new ServicioController())->listarActivos();
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    if (empty($_SESSION['user_id'])) {
+        setFlashAlert('error', 'Debes iniciar sesión para confirmar la reserva.');
+        header('Location: ' . appPath('public/login.php'));
+        exit;
+    }
+
     $ctrl   = new ReservaController();
     $result = $ctrl->crear(
         (int)$_SESSION['user_id'],

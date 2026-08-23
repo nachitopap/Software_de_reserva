@@ -119,7 +119,7 @@ function enforcePublicAccessPolicy(): void {
     }
 
     $currentScript = basename($_SERVER['SCRIPT_NAME'] ?? '');
-    $guestAllowedPages = ['index.php', 'login.php', 'logout.php', 'formulario.php', 'calendario.php'];
+    $guestAllowedPages = ['index.php', 'login.php', 'logout.php', 'formulario.php', 'calendario.php', 'nueva_reserva.php', 'inicio.php'];
 
     if (empty($_SESSION['user_id'])) {
         if (!in_array($currentScript, $guestAllowedPages, true)) {
@@ -130,7 +130,7 @@ function enforcePublicAccessPolicy(): void {
         return;
     }
 
-    if (in_array($currentScript, ['index.php', 'login.php', 'register.php', 'formulario.php', 'calendario.php'], true)) {
+    if (in_array($currentScript, ['login.php', 'register.php', 'formulario.php', 'calendario.php'], true)) {
         header('Location: ' . appDashboardUrlForRole($_SESSION['user_role'] ?? ''));
         exit;
     }

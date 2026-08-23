@@ -11,7 +11,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $_POST['password'] ?? ''
     );
     if ($result['success']) {
-        header('Location: ' . appDashboardUrlForRole($result['role']));
+        $destination = match ($result['role']) {
+            ROLE_CLIENTE => appPath('index.php'),
+            ROLE_PROVEEDOR => appPath('public/proveedor/dashboard.php'),
+            ROLE_ADMIN => appPath('public/admin/dashboard.php'),
+            default => appPath('index.php'),
+        };
+        header('Location: ' . $destination);
         exit;
     }
     $pageAlerts[] = ['type' => 'error', 'message' => $result['message']];

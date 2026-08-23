@@ -19,6 +19,7 @@ CREATE TABLE IF NOT EXISTS usuarios (
     sobrenombre VARCHAR(50),
     apellidop    VARCHAR(50) NOT NULL,
     apellidom    VARCHAR(50) NOT NULL,
+    telefono     VARCHAR(30) NOT NULL DEFAULT '',
     email       VARCHAR(150) NOT NULL UNIQUE,
     password    VARCHAR(255) NOT NULL,
     rol         VARCHAR(50) NOT NULL,

@@ -21,7 +21,6 @@
         <button type="submit" class="btn btn-primary btn-block">Entrar</button>
     </form>
 
-    <p class="auth-link">¿Quieres reservar sin login? <a href="formulario.php">Completa el formulario</a></p>
 </div>
 <?php include __DIR__ . '/../layouts/swal-alerts.php'; ?>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>

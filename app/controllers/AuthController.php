@@ -85,27 +85,30 @@ class AuthController {
         $sobrenombre = trim($data['sobrenombre'] ?? '');
         $rut         = encryptSensitiveValue(trim($data['rut']));
 
+        $telefono = trim($data['telefono'] ?? '');
         $stmt = $db->prepare(
-            'INSERT INTO usuarios (rut, rut_hash, nombre, sobrenombre, apellidop, apellidom, email, password, rol)
-             VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)'
+            'INSERT INTO usuarios (rut, rut_hash, nombre, sobrenombre, apellidop, apellidom, telefono, email, password, rol)
+             VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)'
         );
         $stmt->bind_param(
-            'sssssssss',
+            'ssssssssss',
             $rut,
             $rutHash,
             $data['nombre'],
             $sobrenombre,
             $data['apellidop'],
             $data['apellidom'],
+            $telefono,
             $data['email'],
             $hash,
             $data['rol']
         );
 
         if ($stmt->execute()) {
+            $userId = $db->insert_id;
             $stmt->close();
             $db->close();
-            return ['success' => true, 'message' => 'Registro exitoso. Ya puedes iniciar sesión.'];
+            return ['success' => true, 'id' => $userId, 'message' => 'Registro exitoso. Ya puedes iniciar sesión.'];
         }
 
         $stmt->close();
@@ -115,7 +118,7 @@ class AuthController {
 
     public function logout(): void {
         session_destroy();
-        header('Location: ' . appPath('public/login.php'));
+        header('Location: ' . appPath('index.php'));
         exit;
     }
 

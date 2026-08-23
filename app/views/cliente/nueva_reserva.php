@@ -9,7 +9,7 @@
 <body>
 <?php include __DIR__ . '/../layouts/navbar.php'; ?>
 <div class="app-layout">
-<?php include __DIR__ . '/../layouts/sidebar.php'; ?>
+<?php //  include __DIR__ . '/../layouts/sidebar.php'; ?>
 <main class="app-content">
     <h2>Nueva Reserva</h2>
 
