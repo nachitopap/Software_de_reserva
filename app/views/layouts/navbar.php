@@ -1,5 +1,5 @@
 <?php
-require_once __DIR__ . '/../../config/config.php';
+require_once __DIR__ . '/../../../config/config.php';
 $role = $_SESSION['user_role'] ?? '';
 $name = $_SESSION['user_name'] ?? 'Usuario';
 
