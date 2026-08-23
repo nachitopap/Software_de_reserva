@@ -13,11 +13,11 @@ USE software_reserva;
 -- ------------------------------------------------------------
 CREATE TABLE IF NOT EXISTS usuarios (
     id          INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
-    nombre      VARCHAR(100) NOT NULL,
-    apellido    VARCHAR(100) NOT NULL,
+    nombre      VARCHAR(50) NOT NULL,
+    apellido    VARCHAR(50) NOT NULL,
     email       VARCHAR(150) NOT NULL UNIQUE,
     password    VARCHAR(255) NOT NULL,
-    rol         ENUM('cliente', 'proveedor', 'admin') NOT NULL DEFAULT 'cliente',
+    rol         VARCHAR(50) NOT NULL,
     activo      TINYINT(1) NOT NULL DEFAULT 1,
     created_at  DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
     updated_at  DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
