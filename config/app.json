@@ -1,0 +1,17 @@
+{
+  "app": {
+    "name": "Software de Reservas",
+    "version": "1.0.0",
+    "locale": "es",
+    "timezone": "America/Argentina/Buenos_Aires"
+  },
+  "roles": ["cliente", "proveedor", "admin"],
+  "reserva": {
+    "estados": ["pendiente", "confirmada", "cancelada", "completada"],
+    "anticipacion_minima_horas": 1,
+    "anticipacion_maxima_dias": 90
+  },
+  "paginacion": {
+    "items_por_pagina": 10
+  }
+}

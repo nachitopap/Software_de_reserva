@@ -1,0 +1,11 @@
+# .gitignore – Software de Reservas
+
+# Configuración local sensible
+config/database.php
+
+# Dependencias / artefactos
+vendor/
+node_modules/
+*.log
+.DS_Store
+Thumbs.db
