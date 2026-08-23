@@ -11,16 +11,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $_POST['password'] ?? ''
     );
     if ($result['success']) {
-        switch ($result['role']) {
-            case ROLE_ADMIN:
-                header('Location: ' . APP_URL . '/public/admin/dashboard.php');
-                break;
-            case ROLE_PROVEEDOR:
-                header('Location: ' . APP_URL . '/public/proveedor/dashboard.php');
-                break;
-            default:
-                header('Location: ' . APP_URL . '/public/cliente/dashboard.php');
-        }
+        header('Location: ' . appDashboardUrlForRole($result['role']));
         exit;
     }
     $error = $result['message'];
