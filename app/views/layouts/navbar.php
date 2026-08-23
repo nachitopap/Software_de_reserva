@@ -5,6 +5,7 @@ $name = $_SESSION['user_name'] ?? 'Usuario';
 
 $dashboardUrl = appDashboardUrlForRole($role);
 ?>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <nav class="navbar">
     <div class="navbar-brand">
         <a href="<?= htmlspecialchars($dashboardUrl) ?>">

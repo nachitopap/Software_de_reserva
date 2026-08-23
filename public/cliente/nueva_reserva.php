@@ -6,7 +6,7 @@ require_once __DIR__ . '/../../app/controllers/ServicioController.php';
 
 AuthController::requireAuth(ROLE_CLIENTE);
 
-$error    = '';
+$pageAlerts = [];
 $servicios = (new ServicioController())->listarActivos();
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -18,10 +18,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         trim($_POST['notas'] ?? '')
     );
     if ($result['success']) {
+        setFlashAlert('success', $result['message']);
         header('Location: ' . appPath('public/cliente/dashboard.php'));
         exit;
     }
-    $error = $result['message'];
+    $pageAlerts[] = ['type' => 'error', 'message' => $result['message']];
 }
 
 include __DIR__ . '/../../app/views/cliente/nueva_reserva.php';

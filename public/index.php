@@ -6,5 +6,5 @@ if (!empty($_SESSION['user_id'])) {
     exit;
 }
 
-header('Location: ' . appPath('public/login.php'));
+header('Location: ' . appPath('public/formulario.php'));
 exit;

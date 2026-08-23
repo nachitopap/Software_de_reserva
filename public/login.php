@@ -2,7 +2,7 @@
 require_once __DIR__ . '/../config/funciones.php';
 require_once __DIR__ . '/../app/controllers/AuthController.php';
 
-$error = '';
+$pageAlerts = [];
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $auth   = new AuthController();
@@ -14,7 +14,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         header('Location: ' . appDashboardUrlForRole($result['role']));
         exit;
     }
-    $error = $result['message'];
+    $pageAlerts[] = ['type' => 'error', 'message' => $result['message']];
 }
 
 include __DIR__ . '/../app/views/auth/login.php';

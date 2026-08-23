@@ -13,10 +13,6 @@
 <main class="app-content">
     <h2>Reservas de mis Servicios</h2>
 
-    <?php if (!empty($message)): ?>
-        <div class="alert alert-success"><?= htmlspecialchars($message) ?></div>
-    <?php endif; ?>
-
     <?php if (empty($reservas)): ?>
         <p class="empty-msg">No hay reservas para tus servicios todavía.</p>
     <?php else: ?>
@@ -64,6 +60,7 @@
     <a href="mis_servicios.php" class="btn btn-secondary">Administrar Servicios</a>
 </main>
 </div>
+<?php include __DIR__ . '/../layouts/swal-alerts.php'; ?>
 <script src="../js/app.js"></script>
 </body>
 </html>

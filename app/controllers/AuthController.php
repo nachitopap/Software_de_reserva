@@ -24,7 +24,7 @@ class AuthController {
         }
 
         $_SESSION['user_id']   = $user['id'];
-        $_SESSION['user_name'] = self::buildUserDisplayName($user);
+        $_SESSION['user_name'] = buildPersonDisplayName($user);
         $_SESSION['user_role'] = $user['rol'];
 
         return ['success' => true, 'role' => $user['rol']];
@@ -51,7 +51,7 @@ class AuthController {
             return ['success' => false, 'message' => 'La contraseña debe tener al menos 8 caracteres.'];
         }
 
-        $rutNormalizado = self::normalizeRut($data['rut']);
+        $rutNormalizado = normalizeRutValue($data['rut']);
         if ($rutNormalizado === '') {
             return ['success' => false, 'message' => 'RUT no válido.'];
         }
@@ -83,7 +83,7 @@ class AuthController {
 
         $hash = password_hash($data['password'], PASSWORD_BCRYPT, ['cost' => 12]);
         $sobrenombre = trim($data['sobrenombre'] ?? '');
-        $rut         = trim($data['rut']);
+        $rut         = encryptSensitiveValue(trim($data['rut']));
 
         $stmt = $db->prepare(
             'INSERT INTO usuarios (rut, rut_hash, nombre, sobrenombre, apellidop, apellidom, email, password, rol)
@@ -128,19 +128,5 @@ class AuthController {
             header('Location: ' . appPath('public/acceso_denegado.php'));
             exit;
         }
-    }
-
-    private static function normalizeRut(string $rut): string {
-        $normalized = strtoupper(trim($rut));
-        $normalized = preg_replace('/[^0-9K]/', '', $normalized) ?? '';
-        return $normalized;
-    }
-
-    private static function buildUserDisplayName(array $user): string {
-        return trim(implode(' ', array_filter([
-            trim((string)($user['nombre'] ?? '')),
-            trim((string)($user['apellidop'] ?? '')),
-            trim((string)($user['apellidom'] ?? '')),
-        ])));
     }
 }

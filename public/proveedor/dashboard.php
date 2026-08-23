@@ -7,6 +7,10 @@ AuthController::requireAuth(ROLE_PROVEEDOR);
 
 $ctrl    = new ReservaController();
 $reservas = $ctrl->listarPorProveedor((int)$_SESSION['user_id']);
-$message  = '';
+$pageAlerts = [];
+$flashAlert = consumeFlashAlert();
+if ($flashAlert) {
+    $pageAlerts[] = $flashAlert;
+}
 
 include __DIR__ . '/../../app/views/proveedor/dashboard.php';

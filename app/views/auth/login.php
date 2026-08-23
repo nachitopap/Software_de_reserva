@@ -11,10 +11,6 @@
     <h1>🗓 Software de Reservas</h1>
     <h2>Iniciar Sesión</h2>
 
-    <?php if (!empty($error)): ?>
-        <div class="alert alert-error"><?= htmlspecialchars($error) ?></div>
-    <?php endif; ?>
-
     <form method="POST" action="login.php" novalidate>
         <label for="email">Email</label>
         <input type="email" id="email" name="email" required placeholder="usuario@email.com">
@@ -25,8 +21,10 @@
         <button type="submit" class="btn btn-primary btn-block">Entrar</button>
     </form>
 
-    <p class="auth-link">¿No tienes cuenta? <a href="register.php">Regístrate aquí</a></p>
+    <p class="auth-link">¿Quieres reservar sin login? <a href="formulario.php">Completa el formulario</a></p>
 </div>
+<?php include __DIR__ . '/../layouts/swal-alerts.php'; ?>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script src="js/app.js"></script>
 </body>
 </html>

@@ -11,13 +11,6 @@
     <h1>🗓 Software de Reservas</h1>
     <h2>Crear Cuenta</h2>
 
-    <?php if (!empty($error)): ?>
-        <div class="alert alert-error"><?= htmlspecialchars($error) ?></div>
-    <?php endif; ?>
-    <?php if (!empty($success)): ?>
-        <div class="alert alert-success"><?= htmlspecialchars($success) ?></div>
-    <?php endif; ?>
-
     <form method="POST" action="register.php" novalidate>
         <label for="rut">RUT</label>
         <input type="text" id="rut" name="rut" required placeholder="12345678K">
@@ -52,6 +45,8 @@
 
     <p class="auth-link">¿Ya tienes cuenta? <a href="login.php">Inicia sesión</a></p>
 </div>
+<?php include __DIR__ . '/../layouts/swal-alerts.php'; ?>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script src="js/app.js"></script>
 </body>
 </html>

@@ -53,6 +53,7 @@
     <?php endif; ?>
 </main>
 </div>
+<?php include __DIR__ . '/../layouts/swal-alerts.php'; ?>
 <script src="../js/app.js"></script>
 </body>
 </html>

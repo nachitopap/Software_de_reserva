@@ -6,8 +6,11 @@ require_once __DIR__ . '/../../app/controllers/ServicioController.php';
 AuthController::requireAuth(ROLE_PROVEEDOR);
 
 $ctrl     = new ServicioController();
-$error    = '';
-$message  = '';
+$pageAlerts = [];
+$flashAlert = consumeFlashAlert();
+if ($flashAlert) {
+    $pageAlerts[] = $flashAlert;
+}
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $result = $ctrl->crear((int)$_SESSION['user_id'], [
@@ -17,9 +20,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         'duracion_min'=> (int)($_POST['duracion_min'] ?? 60),
     ]);
     if ($result['success']) {
-        $message = $result['message'];
+        setFlashAlert('success', $result['message']);
+        header('Location: mis_servicios.php');
+        exit;
     } else {
-        $error = $result['message'];
+        $pageAlerts[] = ['type' => 'error', 'message' => $result['message']];
     }
 }
 

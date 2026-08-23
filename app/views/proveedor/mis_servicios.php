@@ -13,13 +13,6 @@
 <main class="app-content">
     <h2>Mis Servicios</h2>
 
-    <?php if (!empty($message)): ?>
-        <div class="alert alert-success"><?= htmlspecialchars($message) ?></div>
-    <?php endif; ?>
-    <?php if (!empty($error)): ?>
-        <div class="alert alert-error"><?= htmlspecialchars($error) ?></div>
-    <?php endif; ?>
-
     <h3>Agregar Servicio</h3>
     <form method="POST" action="mis_servicios.php" novalidate>
         <label for="nombre">Nombre del servicio</label>
@@ -60,6 +53,7 @@
     <?php endif; ?>
 </main>
 </div>
+<?php include __DIR__ . '/../layouts/swal-alerts.php'; ?>
 <script src="../js/app.js"></script>
 </body>
 </html>

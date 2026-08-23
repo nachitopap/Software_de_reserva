@@ -10,17 +10,18 @@ switch ($role) {
         $roleLabel = 'Administrador';
         $menuItems = [
             [
-                'label' => 'Gestionar usuarios',
-                'description' => 'Activar, desactivar y revisar cuentas.',
-                'icon' => 'bi-people-fill',
-                'href' => appPath('public/admin/usuarios.php')
-            ],
-            [
                 'label' => 'Resumen general',
                 'description' => 'Ver reservas, servicios y totales.',
                 'icon' => 'bi-speedometer2',
                 'href' => appPath('public/admin/dashboard.php')
             ],
+            [
+                'label' => 'Gestionar usuarios',
+                'description' => 'Activar, desactivar y revisar cuentas.',
+                'icon' => 'bi-people-fill',
+                'href' => appPath('public/admin/usuarios.php')
+            ],
+            
         ];
         break;
     case ROLE_PROVEEDOR:

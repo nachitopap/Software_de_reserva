@@ -13,10 +13,6 @@
 <main class="app-content">
     <h2>Nueva Reserva</h2>
 
-    <?php if (!empty($error)): ?>
-        <div class="alert alert-error"><?= htmlspecialchars($error) ?></div>
-    <?php endif; ?>
-
     <form method="POST" action="nueva_reserva.php" novalidate>
         <label for="servicio_id">Servicio</label>
         <select id="servicio_id" name="servicio_id" required>
@@ -41,6 +37,7 @@
     </form>
 </main>
 </div>
+<?php include __DIR__ . '/../layouts/swal-alerts.php'; ?>
 <script src="../js/app.js"></script>
 </body>
 </html>
