@@ -1,20 +1,24 @@
 -- ============================================================
--- Base de datos: software_reserva
+-- Base de datos: software_reserva_barberias
 -- ============================================================
 
-CREATE DATABASE IF NOT EXISTS software_reserva
+CREATE DATABASE IF NOT EXISTS srb
     CHARACTER SET utf8mb4
     COLLATE utf8mb4_unicode_ci;
 
-USE software_reserva;
+USE srb;
 
 -- ------------------------------------------------------------
 -- Tabla: usuarios
 -- ------------------------------------------------------------
 CREATE TABLE IF NOT EXISTS usuarios (
     id          INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+    rut         VARBINARY(255) NOT NULL,
+    rut_hash    BINARY(32) NOT NULL UNIQUE,
     nombre      VARCHAR(50) NOT NULL,
-    apellido    VARCHAR(50) NOT NULL,
+    sobrenombre VARCHAR(50),
+    apellidop    VARCHAR(50) NOT NULL,
+    apellidom    VARCHAR(50) NOT NULL,
     email       VARCHAR(150) NOT NULL UNIQUE,
     password    VARCHAR(255) NOT NULL,
     rol         VARCHAR(50) NOT NULL,
@@ -61,11 +65,13 @@ CREATE TABLE IF NOT EXISTS reservas (
 -- ------------------------------------------------------------
 -- Usuario admin por defecto  (password: Admin1234!)
 -- ------------------------------------------------------------
-INSERT INTO usuarios (nombre, apellido, email, password, rol)
+INSERT INTO usuarios (nombre, sobrenombre, apellidop, apellidom, email, password, rol)
 VALUES (
     'Admin',
+    '',
     'Sistema',
+    '',
     'admin@reservas.com',
-    '$2y$12$eImiTXuWVxfM37uY4JANjQ==',  -- reemplazar con hash real
+    'id23.-',  -- reemplazar con hash real
     'admin'
 );
