@@ -8,8 +8,9 @@
 </head>
 <body>
 <?php include __DIR__ . '/../layouts/navbar.php'; ?>
-
-<main class="container">
+<div class="app-layout">
+<?php include __DIR__ . '/../layouts/sidebar.php'; ?>
+<main class="app-content">
     <h2>Mis Reservas</h2>
 
     <a href="nueva_reserva.php" class="btn btn-primary">+ Nueva Reserva</a>
@@ -51,6 +52,7 @@
     </table>
     <?php endif; ?>
 </main>
+</div>
 <script src="../js/app.js"></script>
 </body>
 </html>

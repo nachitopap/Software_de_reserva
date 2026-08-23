@@ -8,8 +8,9 @@
 </head>
 <body>
 <?php include __DIR__ . '/../layouts/navbar.php'; ?>
-
-<main class="container">
+<div class="app-layout">
+<?php include __DIR__ . '/../layouts/sidebar.php'; ?>
+<main class="app-content">
     <h2>Gestión de Usuarios</h2>
 
     <?php if (!empty($message)): ?>
@@ -54,6 +55,7 @@
         </tbody>
     </table>
 </main>
+</div>
 <script src="../js/app.js"></script>
 </body>
 </html>

@@ -8,8 +8,9 @@
 </head>
 <body>
 <?php include __DIR__ . '/../layouts/navbar.php'; ?>
-
-<main class="container">
+<div class="app-layout">
+<?php include __DIR__ . '/../layouts/sidebar.php'; ?>
+<main class="app-content">
     <h2>Reservas de mis Servicios</h2>
 
     <?php if (!empty($message)): ?>
@@ -62,6 +63,7 @@
     <h3>Mis Servicios</h3>
     <a href="mis_servicios.php" class="btn btn-secondary">Administrar Servicios</a>
 </main>
+</div>
 <script src="../js/app.js"></script>
 </body>
 </html>

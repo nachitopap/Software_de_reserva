@@ -8,8 +8,9 @@
 </head>
 <body>
 <?php include __DIR__ . '/../layouts/navbar.php'; ?>
-
-<main class="container">
+<div class="app-layout">
+<?php include __DIR__ . '/../layouts/sidebar.php'; ?>
+<main class="app-content">
     <h2>Mis Servicios</h2>
 
     <?php if (!empty($message)): ?>
@@ -58,6 +59,7 @@
     </table>
     <?php endif; ?>
 </main>
+</div>
 <script src="../js/app.js"></script>
 </body>
 </html>
