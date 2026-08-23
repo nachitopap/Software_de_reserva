@@ -1,7 +1,7 @@
 # .gitignore – Software de Reservas
 
 # Configuración local sensible
-config/database.php
+config/config.php
 
 # Dependencias / artefactos
 vendor/

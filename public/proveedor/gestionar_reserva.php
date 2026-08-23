@@ -1,5 +1,5 @@
 <?php
-require_once __DIR__ . '/../../config/config.php';
+require_once __DIR__ . '/../../config/funciones.php';
 require_once __DIR__ . '/../../app/controllers/AuthController.php';
 require_once __DIR__ . '/../../app/controllers/ReservaController.php';
 
@@ -10,5 +10,5 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $ctrl->actualizarEstado((int)($_POST['reserva_id'] ?? 0), $_POST['estado'] ?? '');
 }
 
-header('Location: ' . APP_URL . '/public/proveedor/dashboard.php');
+header('Location: ' . appPath('public/proveedor/dashboard.php'));
 exit;

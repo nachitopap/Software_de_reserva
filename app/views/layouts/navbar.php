@@ -1,12 +1,9 @@
 <?php
-require_once __DIR__ . '/../../../config/config.php';
+require_once __DIR__ . '/../../../config/funciones.php';
 $role = $_SESSION['user_role'] ?? '';
 $name = $_SESSION['user_name'] ?? 'Usuario';
 
-$dashboardUrl = APP_URL . '/public/';
-if ($role === ROLE_ADMIN)     $dashboardUrl .= 'admin/dashboard.php';
-elseif ($role === ROLE_PROVEEDOR) $dashboardUrl .= 'proveedor/dashboard.php';
-else                          $dashboardUrl .= 'cliente/dashboard.php';
+$dashboardUrl = appDashboardUrlForRole($role);
 ?>
 <nav class="navbar">
     <div class="navbar-brand">
@@ -15,6 +12,6 @@ else                          $dashboardUrl .= 'cliente/dashboard.php';
     <div class="navbar-user">
         <span>👤 <?= htmlspecialchars($name) ?></span>
         <span class="badge badge-<?= htmlspecialchars($role) ?>"><?= htmlspecialchars($role) ?></span>
-        <a href="<?= APP_URL ?>/public/logout.php" class="btn btn-sm btn-secondary">Salir</a>
+        <a href="<?= htmlspecialchars(appPath('public/logout.php')) ?>" class="btn btn-sm btn-secondary">Salir</a>
     </div>
 </nav>

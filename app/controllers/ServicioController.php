@@ -1,6 +1,6 @@
 <?php
+require_once __DIR__ . '/../../config/funciones.php';
 require_once __DIR__ . '/../../config/config.php';
-require_once __DIR__ . '/../../config/database.php';
 
 class ServicioController {
 

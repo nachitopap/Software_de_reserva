@@ -1,5 +1,5 @@
 <?php
-require_once __DIR__ . '/../../config/config.php';
+require_once __DIR__ . '/../../config/funciones.php';
 require_once __DIR__ . '/../../app/controllers/AuthController.php';
 require_once __DIR__ . '/../../app/controllers/ReservaController.php';
 require_once __DIR__ . '/../../app/controllers/ServicioController.php';
@@ -18,7 +18,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         trim($_POST['notas'] ?? '')
     );
     if ($result['success']) {
-        header('Location: ' . APP_URL . '/public/cliente/dashboard.php');
+        header('Location: ' . appPath('public/cliente/dashboard.php'));
         exit;
     }
     $error = $result['message'];

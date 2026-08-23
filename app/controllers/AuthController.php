@@ -1,6 +1,6 @@
 <?php
+require_once __DIR__ . '/../../config/funciones.php';
 require_once __DIR__ . '/../../config/config.php';
-require_once __DIR__ . '/../../config/database.php';
 
 class AuthController {
 
@@ -89,17 +89,17 @@ class AuthController {
 
     public function logout(): void {
         session_destroy();
-        header('Location: ' . APP_URL . '/public/login.php');
+        header('Location: ' . appPath('public/login.php'));
         exit;
     }
 
     public static function requireAuth(string $rol = ''): void {
         if (empty($_SESSION['user_id'])) {
-            header('Location: ' . APP_URL . '/public/login.php');
+            header('Location: ' . appPath('public/login.php'));
             exit;
         }
         if ($rol && $_SESSION['user_role'] !== $rol) {
-            header('Location: ' . APP_URL . '/public/acceso_denegado.php');
+            header('Location: ' . appPath('public/acceso_denegado.php'));
             exit;
         }
     }
