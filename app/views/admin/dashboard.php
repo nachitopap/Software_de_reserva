@@ -60,6 +60,7 @@
 
     <hr>
     <a href="usuarios.php" class="btn btn-secondary">Gestionar Usuarios</a>
+    <a href="servicios.php" class="btn btn-secondary">Gestionar Servicios</a>
 </main>
 </div>
 <script src="../js/app.js"></script>

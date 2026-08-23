@@ -440,6 +440,12 @@ input:focus, select:focus, textarea:focus {
     gap: .5rem;
 }
 
+.table-muted {
+    margin-top: .2rem;
+    color: var(--color-text-muted);
+    font-size: .82rem;
+}
+
 /* ---- Badges ---- */
 .badge {
     display: inline-block;

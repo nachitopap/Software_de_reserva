@@ -141,6 +141,68 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
             }
 
+            if (modalId === 'edit-service-modal') {
+                const map = {
+                    'edit-servicio-id': button.dataset.serviceId || '',
+                    'edit-proveedor-id': button.dataset.serviceProviderId || '',
+                    'edit-service-name': button.dataset.serviceName || '',
+                    'edit-service-description': button.dataset.serviceDescription || '',
+                    'edit-service-price': button.dataset.servicePrice || '',
+                    'edit-service-duration': button.dataset.serviceDuration || ''
+                };
+
+                Object.keys(map).forEach(fieldId => {
+                    const field = document.getElementById(fieldId);
+                    if (field) {
+                        field.value = map[fieldId];
+                    }
+                });
+            }
+
+            if (modalId === 'status-service-modal') {
+                const serviceIdField = document.getElementById('status-servicio-id');
+                const serviceNameField = document.getElementById('status-servicio-nombre');
+                const serviceActiveField = document.getElementById('status-servicio-activo');
+                const serviceNameLabel = document.getElementById('status-service-name-label');
+                const title = document.getElementById('status-service-modal-title');
+                const subtitle = document.querySelector('#status-service-modal .modal-subtitle');
+                const submitButton = document.querySelector('#status-service-modal button[type="submit"]');
+                const submitIcon = submitButton ? submitButton.querySelector('i') : null;
+                const submitText = submitButton ? submitButton.querySelector('span') : null;
+                const isActive = button.dataset.serviceActive === '1';
+
+                if (serviceIdField) {
+                    serviceIdField.value = button.dataset.serviceId || '';
+                }
+                if (serviceNameField) {
+                    serviceNameField.value = button.dataset.serviceName || '';
+                }
+                if (serviceActiveField) {
+                    serviceActiveField.value = isActive ? '1' : '0';
+                }
+                if (serviceNameLabel) {
+                    serviceNameLabel.textContent = button.dataset.serviceName || '';
+                }
+                if (title) {
+                    title.textContent = isActive ? 'Inactivar servicio' : 'Activar servicio';
+                }
+                if (subtitle) {
+                    subtitle.textContent = isActive
+                        ? 'El servicio dejará de mostrarse como activo para reservas.'
+                        : 'El servicio volverá a estar disponible.';
+                }
+                if (submitButton) {
+                    submitButton.classList.toggle('btn-danger', isActive);
+                    submitButton.classList.toggle('btn-success', !isActive);
+                }
+                if (submitIcon) {
+                    submitIcon.className = 'bi ' + (isActive ? 'bi-toggle-off' : 'bi-toggle-on');
+                }
+                if (submitText) {
+                    submitText.textContent = isActive ? 'Confirmar inactivación' : 'Confirmar activación';
+                }
+            }
+
             openModal(modalId);
         });
     });
