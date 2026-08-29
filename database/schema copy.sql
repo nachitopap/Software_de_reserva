@@ -97,7 +97,6 @@ CREATE TABLE IF NOT EXISTS horarios_servicios (
         REFERENCES proveedores(id) ON DELETE CASCADE,
     CONSTRAINT fk_horario_usuario FOREIGN KEY (usuario_id)
         REFERENCES usuarios(id) ON DELETE CASCADE,
-    CONSTRAINT chk_horario_rango_horas CHECK (hora_inicio < hora_fin),
     CONSTRAINT uq_horario_servicio_dia_hora UNIQUE (servicio_id, proveedor_id, usuario_id, dia_semana, hora_inicio, hora_fin)
 ) ENGINE=InnoDB;
 
